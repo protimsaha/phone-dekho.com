@@ -18,28 +18,33 @@
     <h1 class="text-warning text-center my-5">Get Your Favourite Mobile Phone!</h1>
 
     <!-- input field -->
-    <div class="input-group mb-3 w-75 mx-auto">
+    <div class="input-group mb-3 w-75 mx-auto mb-4">
         <input id="search-box" type="text" class="form-control" placeholder="Search mobile phones"
             aria-label="Recipient's username" aria-describedby="button-addon2">
         <button onclick="loadPhones()" class="btn btn-outline-warning" type="button">Search</button>
     </div>
 
+    <!-- spinner -->
+    <div id="spinner">
+        <div class="spinner-border text-danger position-relative top-50 start-50" role="status">
+            <span class="visually-hidden mx-auto">Loading...</span>
+        </div>
+        <div class="spinner-border text-warning position-relative top-50 start-50" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-border text-info position-relative top-50 start-50" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!--result not found  -->
+    <div id="result-null" class="w-50 mx-auto">
+        <h4 class="text-center">No result found!</h4>
+    </div>
 
     <!-- Show search result -->
-    <div id="show-result">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card h-100">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
+    <div id="show-result" class="row row-cols-1 row-cols-md-3 g-4 mb-4">
 
-        </div>
     </div>
 
 

@@ -1,0 +1,10 @@
+#spinner{
+    display: none;
+}
+#result-null{
+    background-color: rgb(73, 73, 179);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: none;
+}
