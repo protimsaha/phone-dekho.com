@@ -10,6 +10,9 @@ const toggleMessage = displayMessage => {
 // search phones
 const loadPhones = () => {
 
+    let phoneDetail = document.getElementById('phone-detail');
+    phoneDetail.textContent = ''
+
     toggleSpinner('block')
 
     let searchBox = document.getElementById('search-box')
@@ -22,7 +25,7 @@ const loadPhones = () => {
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
             .then(res => res.json())
-            .then(data => showResult(data.data))
+            .then(data => showResult(data.data.slice(0, 20)))
     }
     searchBox.value = ''
 }
@@ -41,7 +44,7 @@ const showResult = phones => {
     else {
 
         phones?.forEach(phone => {
-
+            //show result div
             const div = document.createElement('div');
             div.innerHTML = `
             <div class="col">
@@ -56,13 +59,12 @@ const showResult = phones => {
             </div>
             `
             showResultDisplay.appendChild(div)
-
         })
-
         toggleSpinner('none');
         toggleMessage('none');
     }
 }
+
 // load phone detail data
 const loadDetail = (phoneId) => {
     const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`
@@ -70,27 +72,24 @@ const loadDetail = (phoneId) => {
         .then(res => res.json())
         .then(data => showDetail(data.data))
 }
+
 // show detail data on UI
 const showDetail = detail => {
-    console.log(detail)
 
     let phoneDetail = document.getElementById('phone-detail');
     phoneDetail.textContent = ''
 
-    let mainFeature = detail.mainFeatures
-
+    // verriables
+    let mainFeature = detail.mainFeatures;
     let sensors = mainFeature.sensors;
     let others = detail.others
-    console.log(others)
 
+    // detail div
     let div = document.createElement('div')
     div.classList.add('card')
     div.innerHTML = `
         <img src="${detail.image}" class="w-75 mx-auto card-img-top" alt="...">
-        <div class="card-body">
-
-        
-        
+        <div class="card-body">      
         <h3 class="card-title">${detail.name}</h3> 
         <h5>Realease Date-${detail.releaseDate ? detail.releaseDate : 'No result found'}</h5>
         <h6>Mainfeatures</h6>
@@ -99,22 +98,16 @@ const showDetail = detail => {
         <p>Memory-${mainFeature.memory ? mainFeature.memory : 'No result found'}</p>  
         <h6>Sensors</h6>
         <p>${sensors ? sensors : 'No result found'}</p>
-
-        <h6>Others</h6>
-       
+          <h6>Others</h6>       
             <p>Bluetooth: ${others?.Bluetooth ? others?.Bluetooth : 'Not available'}</p>
             <p>GPS: ${others?.GPS ? others?.GPS : 'Not available'}</p>
             <p>NFC: ${others?.NFC ? others?.NFC : 'Not available'}</p>
             <p>Radio: ${others?.Radio ? others?.Radio : 'Not available'}</p>
             <p>USB: ${others?.USB ? others?.USB : 'Not available'}</p>
             <p>WLAN: ${others?.WLAN ? others?.WLAN : 'Not available'}</p>
-        
-        
-        
       
         </div>
         `
     phoneDetail.appendChild(div)
-
 
 }
